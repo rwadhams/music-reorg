@@ -1,0 +1,22 @@
+plugins {
+    // Apply the groovy plugin to add support for Groovy
+    id 'groovy'
+
+    id 'eclipse'
+}
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+	compile 'com.mpatric:mp3agic:0.9.1'
+	
+	// Use the latest Groovy version for building this library
+	implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+
+	// Use the awesome Spock testing and specification framework
+	testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+}
