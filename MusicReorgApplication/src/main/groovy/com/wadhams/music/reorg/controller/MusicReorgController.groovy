@@ -20,12 +20,12 @@ class MusicReorgController {
 		
 		//augment AppMusic with title and artist
 		context.appMusicList.each {am ->
-			am.musicMetadata = mrService.findMusicMetadata(am.file, am.music)
+			am.musicMetadata = mrService.findMusicMetadata(am.file, am.extension)
 		}
 
 		//buildNewFilename
 		context.appMusicList.each {am ->
-			am.newFilename = mrService.buildNewFilename(am, context)
+			am.newFilename = mrService.buildNewFilename(am)
 		}
 		
 		//Action.Report

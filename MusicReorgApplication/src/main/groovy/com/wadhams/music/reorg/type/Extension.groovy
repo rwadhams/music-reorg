@@ -2,24 +2,24 @@ package com.wadhams.music.reorg.type
 
 import java.util.regex.Pattern
 
-enum Music {
-	MP3(['MP3'], 'MP3'),
-	WMA(['WMA'], 'WMA'),
+enum Extension {
+	MP3(['MP3'], 'mp3'),
+	WMA(['WMA'], 'wma'),
 	Unknown(['Unknown'], '');
 	
 	private static Pattern extensionPattern = ~/.*\.(\w{3,4})$/
 	
-	private static EnumSet<Music> allEnums = EnumSet.allOf(Music.class)
+	private static EnumSet<Extension> allEnums = EnumSet.allOf(Extension.class)
 	
 	private final List<String> matchingExtensions
-	private final String extension
+	private final String newFileExtension
 	
-	Music(List<String> matchingExtensions, String extension) {
+	Extension(List<String> matchingExtensions, String newFileExtension) {
 		this.matchingExtensions = matchingExtensions
-		this.extension = extension
+		this.newFileExtension = newFileExtension
 	}
 	
-	public static Music findByFileExtension(File f) {
+	public static Extension findByFileExtension(File f) {
 		String fileExtension = ''
 		def m = f.name =~ extensionPattern
 		if (m) {
@@ -30,7 +30,7 @@ enum Music {
 		
 		if (fileExtension) {
 			fileExtension = fileExtension.toUpperCase()
-			for (Music e : allEnums) {
+			for (Extension e : allEnums) {
 				if (e.matchingExtensions.contains(fileExtension)) {
 					return e
 				}
@@ -39,12 +39,12 @@ enum Music {
 		else {
 			println 'findByFileExtension() was passed a file without an extension'
 			println ''
-			return Music.Unknown
+			return Extension.Unknown
 		}
 		
 		//println "Unknown extension: $fileExtension"
 		//println ''
-		return Music.Unknown
+		return Extension.Unknown
 	}
 
 }
